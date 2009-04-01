@@ -8,4 +8,4 @@ end
 require "activesupport"
 require "chrono_trigger/shell"
 require "chrono_trigger/trigger"
-require "chrono_trigger/date_list"
+require "chrono_trigger/cron_entry"

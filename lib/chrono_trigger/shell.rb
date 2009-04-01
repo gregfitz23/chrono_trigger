@@ -4,14 +4,27 @@ module ChronoTrigger
   
   class Shell
     
-    def trigger(&block)
-      raise ConfigurationException unless block_given?
+    DEFAULT_TRIGGERS = "lib/triggers/*.rb"
+    def load_triggers(files = Dir.glob("#{DEFAULT_TRIGGERS}"))
+      files.each { |file| self.instance_eval(File.read(file), file) }
+    end
+    
+    #Instantiate a trigger and evaluate the passed in block in the context of the trigger.
+    #This is the initial method call when setting up a configuration using the DSL. 
+    def trigger(name, &block)
+      raise ConfigurationException.new("No configuration specified for trigger #{name}") unless block_given?
       
-      trigger = Trigger.new
+      trigger = Trigger.new(name)
       trigger.instance_eval(&block)
       
       triggers << trigger
       trigger
+    end
+    
+    #Run execute on any trigger who's cron entry matches the current time.
+    def execute_triggers
+      now = Time.now
+      triggers.map {|trigger| trigger.execute_on_match(now)}
     end
     
     def triggers
