@@ -1,2 +1,3 @@
-# Remember to copy the tasks/chrono_trigger.rake file to your Rails application.
+# Remember to add chrono_trigger.rake to lib/tasks in your rails project containing:
+# require 'chrono_trigger/tasks'
 

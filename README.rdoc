@@ -1,6 +1,6 @@
 = chrono_trigger
 
-* FIX (url)
+* http://github.com/gregfitz23/chrono_trigger/tree/master
 
 == DESCRIPTION:
 
@@ -8,11 +8,10 @@ A cron framework for defining cron tasks using a readable DSL.
 
 == FEATURES/PROBLEMS:
 
-* FIX (list of features or problems)
-
 == SYNOPSIS:
 
-After installation, copy the tasks/chrono_trigger.rake file to your Rails application.
+After installation, create lib/tasks/chrono_trigger.rake containing: require 'chrono_trigger/tasks'
+
 Create trigger files (by default in the lib/triggers) directory.
 Triggers should follow the pattern:
 
@@ -27,11 +26,11 @@ Execute rake RAILS_ENV={env} chrono_trigger:run
 
 == REQUIREMENTS:
 
-* FIX (list of requirements)
+*  ActiveSupport >= 2.0.2
 
 == INSTALL:
 
-* FIX (sudo gem install, anything else)
+* sudo gem install gregfitz23-chrono_trigger
 
 == LICENSE:
 
