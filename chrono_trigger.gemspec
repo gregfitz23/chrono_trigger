@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{chrono_trigger}
-  s.version = "0.0.1"
+  s.version = "0.0.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Greg Fitzgerald"]
@@ -10,9 +10,9 @@ Gem::Specification.new do |s|
   s.description = %q{A cron framework for defining cron tasks using a readable DSL.}
   s.email = ["fitzgerald@healthcentral.com"]
   s.extra_rdoc_files = ["History.txt", "Manifest.txt", "PostInstall.txt", "README.rdoc"]
-  s.files = ["History.txt", "Manifest.txt", "PostInstall.txt", "README.rdoc", "Rakefile", "lib/chrono_trigger.rb", "lib/chrono_trigger/cron_entry.rb", "lib/chrono_trigger/shell.rb", "lib/chrono_trigger/trigger.rb", "lib/triggers/test_triggers.rb", "script/console", "script/destroy", "script/generate", "tasks/chrono_trigger.rake", "test/test_chrono_trigger.rb", "test/test_cron_entry.rb", "test/test_helper.rb", "test/test_shell.rb", "test/test_trigger.rb", "test/triggers.rb"]
+  s.files = ["History.txt", "Manifest.txt", "PostInstall.txt", "README.rdoc", "Rakefile", "lib/chrono_trigger.rb", "lib/chrono_trigger/cron_entry.rb", "lib/chrono_trigger/shell.rb", "lib/chrono_trigger/tasks.rb", "lib/chrono_trigger/trigger.rb", "lib/triggers/test_triggers.rb", "script/console", "script/destroy", "script/generate", "tasks/chrono_trigger.rake", "test/test_chrono_trigger.rb", "test/test_cron_entry.rb", "test/test_helper.rb", "test/test_shell.rb", "test/test_trigger.rb", "test/triggers.rb"]
   s.has_rdoc = true
-  s.homepage = %q{FIX (url)}
+  s.homepage = %q{http://github.com/gregfitz23/chrono_trigger/tree/master}
   s.rdoc_options = ["--main", "README.rdoc"]
   s.require_paths = ["lib"]
   s.rubyforge_project = %q{gregfitz23-chrono_trigger}
