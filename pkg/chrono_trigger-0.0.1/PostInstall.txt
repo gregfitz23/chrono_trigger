@@ -1,2 +1,0 @@
-# Remember to copy the tasks/chrono_trigger.rake file to your Rails application.
-
