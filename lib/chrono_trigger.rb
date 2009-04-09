@@ -5,7 +5,7 @@ module ChronoTrigger
   VERSION = '0.0.2'
 end
 
-require "activesupport"
+require "activesupport" unless defined? ActiveSupport
 require "chrono_trigger/shell"
 require "chrono_trigger/trigger"
 require "chrono_trigger/cron_entry"

@@ -1,5 +1,5 @@
 require File.join(File.dirname(__FILE__), 'process')
-require "chrono_trigger"
+require "logger"
 require 'optparse'
 require 'yaml'
 
@@ -31,7 +31,7 @@ module ChronoTrigger
       pid = @process.running?
       if pid
         if options[:force]
-          STDERR.puts "Shutting down existing ChronoTrigger."
+          STDOUT.puts "Shutting down existing ChronoTrigger."
           @process.kill
           @process = ProcessHelper.new(options[:logger], options[:pid_file], options[:user], options[:group])
         else
@@ -49,13 +49,14 @@ module ChronoTrigger
       self.options =  { 
                        :log_level => Logger::INFO,
                        :daemonize => false,
-                       :pid_file => File.join('', 'var', 'run', 'chrono_trigger.pid')
+                       :pid_file => File.join('', 'var', 'run', 'chrono_trigger.pid'),
+                       :env => "development"
                       }
 
       OptionParser.new do |opts|
         opts.summary_width = 25
 
-        opts.banner = "ChronoTrigger\n\n",
+        opts.banner = "ChronoTrigger - Execute cron jobs within the context of a Rails application\n\n",
                       "usage: chrono_trigger [options...]\n",
                       "       chrono_trigger --help\n",
                       "       chrono_trigger --version\n"
@@ -63,16 +64,27 @@ module ChronoTrigger
         opts.separator ""
         opts.separator ""; opts.separator "ChronoTrigger Options:"
         
-        opts.on("-tTRIGGER_FILE", "--triggers TRIGGERS", "Path to file specifying triggers to be executed") do |trigger_file|
+        opts.on("-tTRIGGER_FILE", "--triggers TRIGGERS", "Path to file specifying triggers to be executed.  When also specifying -a, this path will be relative to the application path") do |trigger_file|
           options[:trigger_file] = trigger_file
         end
         
-        opts.on("-f", "--force", "Force restart of ChronoTrigger process.") do
+        opts.on("-f", "--force", "Force restart of ChronoTrigger process (can be used in conjunction with -P).") do
           options[:force] = true
         end
         
-        opts.on("-s", "--stop", "Stop a currently running ChronoTrigger process.") do
+        opts.on("-s", "--stop", "Stop a currently running ChronoTrigger process (can be used in conjunction with -P).") do
           options[:stop] = true
+        end
+        
+        opts.separator ""
+        opts.separator ""; opts.separator "Rails options:"
+        
+        opts.on("-aAPPLICATION", "--application RAILS", "Path to Rails application context to execture triggers in.") do |application_context|
+          options[:application_context]  = application_context
+        end
+        
+        opts.on("-eENVIRONMENT", "--environment ENVIRONMENT", "Rails environment to execute triggers in.") do |environment|
+          options[:env] = environment
         end
         
         opts.separator ""
@@ -111,6 +123,10 @@ module ChronoTrigger
 
       @process.daemonize if options[:daemonize]
 
+      if application_context = options[:application_context]
+        Dir.chdir(application_context)
+      end
+      
       setup_signal_traps
       @process.write_pid_file
 

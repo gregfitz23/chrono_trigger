@@ -13,13 +13,14 @@ A cron framework for defining cron tasks using a readable DSL.
 Create trigger files (by default in the lib/triggers) directory.
 Triggers should follow the pattern:
 
+do
 trigger "name" do
 	runs { code to execute }
 	on  :monday
 	every :minutes=>10
 	at :hour=>9, :minute=>[30,50]
 end
-
+end
 Run chrono_trigger -t{full path to trigger file}
 
 == REQUIREMENTS:
