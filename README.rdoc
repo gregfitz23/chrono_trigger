@@ -10,8 +10,6 @@ A cron framework for defining cron tasks using a readable DSL.
 
 == SYNOPSIS:
 
-After installation, create lib/tasks/chrono_trigger.rake containing: require 'chrono_trigger/tasks'
-
 Create trigger files (by default in the lib/triggers) directory.
 Triggers should follow the pattern:
 
@@ -22,7 +20,7 @@ trigger "name" do
 	at :hour=>9, :minute=>[30,50]
 end
 
-Execute rake RAILS_ENV={env} chrono_trigger:run
+Run chrono_trigger -t{full path to trigger file}
 
 == REQUIREMENTS:
 

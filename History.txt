@@ -1,3 +1,7 @@
+== 0.0.4 2009-04-09
+* 1 enhancement
+  * Added chrono_trigger binary and supporting files
+
 == 0.0.2 2009-04-02
 
 * 1 minor enhancement:

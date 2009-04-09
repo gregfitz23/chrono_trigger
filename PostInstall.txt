@@ -1,3 +1,1 @@
-# Remember to add chrono_trigger.rake to lib/tasks in your rails project containing:
-# require 'chrono_trigger/tasks'
 

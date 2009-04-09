@@ -25,6 +25,7 @@ module ChronoTrigger
     #Run execute on any trigger who's cron entry matches the current time.
     def execute_triggers
       now = Time.now
+      STDOUT.puts "triggers: #{triggers}"
       triggers.map {|trigger| trigger.execute_on_match(now)}
     end
     

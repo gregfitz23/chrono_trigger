@@ -1,5 +1,5 @@
 trigger "trigger1" do
-  runs { puts "trigger 1 runs every 1 minutes; executed at #{Time.now}"}
+  runs { File.open("/tmp/test_#{Time.now}.txt", 'w') {|file| file.puts "trigger 1 runs every 1 minutes; executed at #{Time.now}"}}
   every :minutes=>1  
 end
 

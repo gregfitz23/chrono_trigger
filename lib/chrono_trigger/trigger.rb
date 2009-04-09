@@ -55,6 +55,7 @@ module ChronoTrigger
     end
     
     def execute
+      STDOUT.puts "executing #{@exec_block}"
       @exec_block.call
     end
   

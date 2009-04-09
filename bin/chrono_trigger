@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+
+require 'chrono_trigger/runner'
+
+ChronoTrigger::Runner.run
+
