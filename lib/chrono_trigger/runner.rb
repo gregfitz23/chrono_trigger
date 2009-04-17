@@ -64,8 +64,8 @@ module ChronoTrigger
         opts.separator ""
         opts.separator ""; opts.separator "ChronoTrigger Options:"
         
-        opts.on("-tTRIGGER_FILE", "--triggers TRIGGERS", "Path to file specifying triggers to be executed.  When also specifying -a, this path will be relative to the application path") do |trigger_file|
-          options[:trigger_file] = trigger_file
+        opts.on("-tTRIGGER_FILES", "--triggers TRIGGER_FILES", "Path to file(s) specifying triggers to be executed.  Multiple files should be separated by a :.  When also specifying -a, this path will be relative to the application path") do |trigger_files|
+          options[:trigger_files] = trigger_files
         end
         
         opts.on("-f", "--force", "Force restart of ChronoTrigger process (can be used in conjunction with -P).") do

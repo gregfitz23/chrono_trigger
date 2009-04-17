@@ -1,3 +1,4 @@
+require "chrono_trigger"
 module ChronoTrigger
   
   class Process
@@ -7,7 +8,7 @@ module ChronoTrigger
         setup(options)
         
         shell = ChronoTrigger::Shell.new
-        shell.load_triggers(options[:trigger_file])
+        shell.load_triggers(options[:trigger_files].split(":"))
         loop do
           shell.execute_triggers
           sleep 1.minute.to_i

@@ -18,6 +18,18 @@ class TestTrigger < Test::Unit::TestCase
       should "execute @block_to_run on call to execute" do
         assert_equal @block_to_run, @trigger.execute
       end
+      
+      context "that raises an exception" do
+        setup do
+          @trigger.runs { raise Exception.new("test error")}
+        end
+        
+        should "be caught and logged by the trigger" do
+          assert_nothing_raised do
+            quietly { @trigger.execute }
+          end
+        end
+      end #that raises an exception
     end #and a block of code to run
 
     context "and a call to #on with some days" do

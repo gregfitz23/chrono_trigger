@@ -55,7 +55,12 @@ module ChronoTrigger
     end
     
     def execute
-      @exec_block.call
+      begin
+        @exec_block.call
+      rescue Exception
+        STDERR.puts "Exception #{$!.inspect} caught in Trigger##{self.name}.  Backtrace:"
+        STDERR.puts $!.backtrace
+      end
     end
   
   

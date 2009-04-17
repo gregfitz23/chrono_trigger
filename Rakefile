@@ -1,8 +1,8 @@
 %w[rubygems rake rake/clean fileutils newgem rubigen].each { |f| require f }
 require File.dirname(__FILE__) + '/lib/chrono_trigger'
 
-# Generate all the Rake tasks
-# Run 'rake -T' to see list of generated tasks (from gem root directory)
+## Generate all the Rake tasks
+## Run 'rake -T' to see list of generated tasks (from gem root directory)
 # $hoe = Hoe.new('chrono_trigger', ChronoTrigger::VERSION) do |p|
 #   p.developer('Greg Fitzgerald', 'fitzgerald@healthcentral.com')
 #   p.changes              = p.paragraphs_of("History.txt", 0..1).join("\n\n")

@@ -1,6 +1,11 @@
 trigger "trigger1" do
-  runs { puts "trigger 1 runs every 1 minutes; executed at #{Time.now}"}}
+  runs { puts "trigger 1 runs every 1 minutes; executed at #{Time.now}" }
   every :minutes=>1  
+end
+
+trigger "exception trigger" do
+  runs { raise Exception.new("test exception")}
+  every :minutes=>2
 end
 
 trigger "trigger2" do
