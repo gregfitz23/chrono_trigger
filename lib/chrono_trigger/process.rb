@@ -1,4 +1,3 @@
-require "chrono_trigger"
 module ChronoTrigger
   
   class Process
@@ -31,6 +30,8 @@ module ChronoTrigger
         STDOUT.puts "Loading application environment at #{File.join(application_context, 'config', 'environment')} for '#{ENV['RAILS_ENV']}' enviroment."
         require(application_path)              
       end
+      
+      require "chrono_trigger"
     end
   end    
 end
