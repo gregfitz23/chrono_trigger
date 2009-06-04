@@ -7,7 +7,7 @@ module ChronoTrigger
         setup(options)
         
         shell = ChronoTrigger::Shell.new
-        shell.load_triggers(options[:trigger_files].split(":"))
+        options[:trigger_files] ? shell.load_triggers(options[:trigger_files].split(":")) : shell.load_triggers 
         loop do
           shell.execute_triggers
           sleep 1.minute.to_i
