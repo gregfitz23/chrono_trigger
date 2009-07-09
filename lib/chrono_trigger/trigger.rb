@@ -23,11 +23,11 @@ module ChronoTrigger
     def at(options={})
       validate_hours_or_minutes!(options)
       
-      if hour = options[:hour]
+      if hour = (options[:hour] || options[:hours])
         cron_entry.set_hours(hour)
       end
       
-      if minute = options[:minute]
+      if minute = (options[:minute] || options[:minutes])
         cron_entry.set_minutes(minute)
       end
     end
@@ -36,11 +36,11 @@ module ChronoTrigger
     #Specifying minutes not divisible by 60 result in an exception, use #at instead.
     def every(options={})
       validate_hours_or_minutes!(options)
-      if minutes = options[:minutes]
+      if minutes = (options[:minutes] || options[:minute])
         cron_entry.set_minutes(extract_minutes_for_every(minutes))
       end
       
-      if hours = options[:hours]
+      if hours = (options[:hours] || options[:hour])
         cron_entry.set_hours(extract_hours_for_every(hours))
       end
     end
