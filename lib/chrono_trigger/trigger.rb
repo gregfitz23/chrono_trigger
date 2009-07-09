@@ -95,7 +95,7 @@ module ChronoTrigger
     def execute_with_active_record
       begin
         @exec_block.call
-      rescue ActiveRecord::ConnectionNotEstablished
+      rescue ActiveRecord::ConnectionNotEstablished, ActiveRecord::StatementInvalid
         ActiveRecord::Base.connection.reconnect!
         execute_without_active_record
       rescue Exception
