@@ -55,12 +55,7 @@ module ChronoTrigger
     end
     
     def execute
-      begin
-        @exec_block.call
-      rescue Exception
-        STDERR.puts "Exception #{$!.inspect} caught in Trigger##{self.name}.  Backtrace:"
-        STDERR.puts $!.backtrace
-      end
+      defined?(ActiveRecord) ? execute_with_active_record : execute_without_active_record
     end
   
   
@@ -92,6 +87,30 @@ module ChronoTrigger
       end
       
       (0...base).select {|num| num % time_value == 0}      
+    end
+    
+    def execute_with_active_record
+      begin
+        @exec_block.call
+      rescue ActiveRecord::ConnectionNotEstablished
+        ActiveRecord::Base.connection.reconnect!
+        execute_without_active_record
+      rescue Exception
+        log_exception
+      end      
+    end
+    
+    def execute_without_active_record
+      begin
+        @exec_block.call
+      rescue Exception
+        log_exception
+      end            
+    end
+    
+    def log_exception
+      STDERR.puts "Exception #{$!.inspect} caught in Trigger##{self.name}.  Backtrace:"
+      STDERR.puts $!.backtrace      
     end
   end
 end

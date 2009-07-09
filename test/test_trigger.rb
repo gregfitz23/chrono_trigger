@@ -118,11 +118,34 @@ class TestTrigger < Test::Unit::TestCase
       end #for 11 minutes            
     end #on a call to #every      
     
+    context "and a block that will raise an ActiveRecord::ConnectionNotEstablished exception, then return a value" do
+      setup do
+        @value = "hello"
+        
+        @run_once = false
+        @trigger.runs do
+          if @run_once
+            @value
+          else
+            @run_once = true
+            raise ActiveRecord::ConnectionNotEstablished
+          end
+        end
+      end
+
+      should "raise an exception, which is caught, then retry the call method" do
+        require "active_record"
+        ActiveRecord::Base.stubs(:connection).returns(mock({:reconnect! => true}))
+        assert_equal @value, @trigger.execute
+      end
+    end #and a block that will raise an ActiveRecord::ConnectionNotEstablished exception, then return a value
+    
     should "raise an exception on call to #every without minutes or hours" do
       assert_raise ChronoTrigger::ConfigurationException do
         @trigger.every()
       end
     end
+    
   end #A Trigger, @trigger,
   
 end
