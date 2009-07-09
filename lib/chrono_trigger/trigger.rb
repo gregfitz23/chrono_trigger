@@ -89,6 +89,9 @@ module ChronoTrigger
       (0...base).select {|num| num % time_value == 0}      
     end
     
+    # When ActiveRecord is defined, attempt to rescue ConnectionNotEstablished errors once,
+    # and reestablish the connection to the database.  If this fails, normal exception logging will take place.
+    # 
     def execute_with_active_record
       begin
         @exec_block.call
@@ -100,6 +103,8 @@ module ChronoTrigger
       end      
     end
     
+    # Execute the execution block and log all exceptions.
+    #
     def execute_without_active_record
       begin
         @exec_block.call
